@@ -34,9 +34,9 @@ JOIN results r ON gs.away_team = r.away_team
 JOIN shootouts s ON r.home_team = s.home_team
 JOIN shootouts s ON r.away_team = s.away_team
 WHERE
-  r.home_score = 1 
-  r.away_score = 1
-  gs.penalty = 1;
+  r.home_score = 1,
+  AND r.away_score = 1,
+  AND gs.penalty = 1;
 
 SELECT
   r.tournament AS "tournament",

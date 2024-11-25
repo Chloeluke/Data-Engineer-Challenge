@@ -1,1 +1,54 @@
-csfeukkd
+SELECT
+  AVG(num of goals) AS "Avg number of goals"
+FROM (
+  SELECT 
+     date AS "date",
+     COUNT(own_goal) AS "number of goals"
+  FROM goalscorers
+  WHERE 
+    date BETWEEN '1900-01-01' AND '2000-12-31' AND own_goal = TRUE
+  GROUP BY 
+    date
+);
+
+SELECT 
+  r.country AS "country",
+  COUNT (s.winner) AS "shootout winner",
+FROM shootout s 
+JOIN results r ON s.winner = r.home_team OR s.winner = r.away_team
+GROUP BY 
+  r.country
+ORDER BY
+  r.country ASC;
+
+#* would give unique identifiers and the join on each table
+
+SELECT
+  gs.home_team AS "home team",
+  gs.away_team AS "away team",
+  gs.penalty AS "penalty",
+  s.winner AS"winning team"
+FROM goalscores gs
+JOIN results r ON gs.home_team = r.home_team
+JOIN results r ON gs.away_team = r.away_team
+JOIN shootouts s ON r.home_team = s.home_team
+JOIN shootouts s ON r.away_team = s.away_team
+WHERE
+  r.home_score = 1 
+  r.away_score = 1
+  gs.penalty = 1;
+
+SELECT
+  r.tournament AS "tournament",
+  gs.scorer AS "top scorer",
+  COUNT(gs.scorer) * 100 SELECT COUNT(gs.minute) FROM goalscorer
+FROM goalscorer gs
+JOIN results r ON gs.date = r.date
+GROUP BY
+  r.tournament,
+  gs.scorer;
+
+
+
+
+
